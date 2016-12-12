@@ -113,15 +113,15 @@ class ServiceManager {
     }
   }
 
-  startLedger (prefix, port, options) {
+  startLedger (prefix, host, port, options) {
     const dbPath = this._getLedgerDbPath(prefix)
-    this.ledgers[prefix] = 'http://localhost:' + port
+    this.ledgers[prefix] = 'http://' + host + ':' + port
     this.ledgerOptions[prefix] = options
     return this._npm(['start'], 'ledger:' + port, {
       env: Object.assign({}, COMMON_ENV, {
         LEDGER_DB_URI: 'sqlite://' + dbPath,
         LEDGER_DB_SYNC: true,
-        LEDGER_HOSTNAME: 'localhost',
+        LEDGER_HOSTNAME: host,
         LEDGER_PORT: port,
         LEDGER_ILP_PREFIX: prefix,
         LEDGER_ADMIN_USER: this.adminUser,
