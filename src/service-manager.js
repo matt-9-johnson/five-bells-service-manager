@@ -175,8 +175,8 @@ class ServiceManager {
 
   startVisualization (port, externalLedgers) {
     Object.assign(this.ledgers, externalLedgers)
-    console.debug("Starting visualization with ledgers" +
-                  JSON.stringify(this.ledgers))
+    console.log("Starting visualization with ledgers" +
+                JSON.stringify(this.ledgers))
 
     return this._npm(['start'], 'visualization:' + port, {
       env: Object.assign({}, COMMON_ENV, {
