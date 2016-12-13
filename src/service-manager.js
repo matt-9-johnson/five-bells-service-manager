@@ -173,9 +173,10 @@ class ServiceManager {
     }, 'public at')
   }
 
-  startVisualization (port) {
-      this.ledgers['demo.ledger.'] = 'http://magic.local:3002'
-      console.log("STARTING VIS with ledgers" + JSON.stringify(this.ledgers))
+  startVisualization (port, externalLedgers) {
+    Object.assign(this.ledgers, externalLedgers)
+    console.debug("Starting visualization with ledgers" +
+                  JSON.stringify(this.ledgers))
 
     return this._npm(['start'], 'visualization:' + port, {
       env: Object.assign({}, COMMON_ENV, {
